@@ -15,18 +15,18 @@ Before you begin, ensure you have the following installed on your local machine:
 1. Clone the Repository
 First, clone the project repository to your local machine. You can do this by running the following command in your terminal:
 
-```git clone https://github.com/MyMonsterVR/salary-calculator.git```
+   ```git clone https://github.com/MyMonsterVR/salary-calculator.git```
 
 2. Install Dependencies
 Navigate to the project directory:
 
-```cd salary-calculator```
+   ```cd salary-calculator```
 Install the necessary dependencies by running:
 
-```npm install``` (or which ever package installer you use)
+   ```npm install``` (or which ever package installer you use)
 This will install all required packages listed in the package.json file.
 
 3. Run the project
 
-```npm run dev```
+   ```npm run dev```
 This will start the Next.js development server at http://localhost:3000.
