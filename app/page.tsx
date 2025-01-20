@@ -10,8 +10,8 @@ import { Calculator } from "lucide-react";
 import { DanishTaxCalculator } from "@/lib/calculator";
 
 const months = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
+  "Januar", "Februar", "Marts", "April", "Maj", "Juni",
+  "Juli", "August", "September", "Oktober", "November", "December"
 ];
 
 type PartialMonthSettings = {
@@ -184,19 +184,19 @@ export default function Home() {
       <div className="max-w-7xl mx-auto space-y-8">
         <div className="flex items-center justify-center space-x-4">
           <Calculator className="h-8 w-8 text-primary" />
-          <h1 className="text-4xl font-bold text-center">Danish Tax Calculator</h1>
+          <h1 className="text-4xl font-bold text-center">Lønberegner</h1>
         </div>
 
         <Tabs defaultValue="monthly" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="monthly">Monthly Rates</TabsTrigger>
-            <TabsTrigger value="parameters">Parameters</TabsTrigger>
+            <TabsTrigger value="monthly">Timeløn</TabsTrigger>
+            <TabsTrigger value="parameters">Indstillinger</TabsTrigger>
           </TabsList>
 
           <TabsContent value="monthly">
             <Card>
               <CardHeader>
-                <CardTitle>Monthly Hourly Rates</CardTitle>
+                <CardTitle>Timeløn pr måned</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 gap-8">
@@ -219,14 +219,14 @@ export default function Home() {
                             checked={partialMonthSettings[month].enabled}
                             onCheckedChange={(checked) => handlePartialMonthToggle(month, checked)}
                           />
-                          <Label>Partial Month</Label>
+                          <Label>Timeløn skift</Label>
                         </div>
                       </div>
 
                       {partialMonthSettings[month].enabled && (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pl-4 border-l-2 border-primary/20">
                           <div className="space-y-2">
-                            <Label htmlFor={`${month}-fromDate`}>From Date</Label>
+                            <Label htmlFor={`${month}-fromDate`}>Fra</Label>
                             <Input
                               id={`${month}-fromDate`}
                               type="date"
@@ -235,7 +235,7 @@ export default function Home() {
                             />
                           </div>
                           <div className="space-y-2">
-                            <Label htmlFor={`${month}-toDate`}>To Date</Label>
+                            <Label htmlFor={`${month}-toDate`}>Til</Label>
                             <Input
                               id={`${month}-toDate`}
                               type="date"
@@ -244,7 +244,7 @@ export default function Home() {
                             />
                           </div>
                           <div className="space-y-2">
-                            <Label htmlFor={`${month}-partialRate`}>Partial Rate</Label>
+                            <Label htmlFor={`${month}-partialRate`}>Første rate</Label>
                             <Input
                               id={`${month}-partialRate`}
                               type="number"
@@ -255,7 +255,7 @@ export default function Home() {
                             />
                           </div>
                           <div className="space-y-2">
-                            <Label htmlFor={`${month}-restRate`}>Rest of Month Rate</Label>
+                            <Label htmlFor={`${month}-restRate`}>Resten af måneden</Label>
                             <Input
                               id={`${month}-restRate`}
                               type="number"
@@ -270,11 +270,10 @@ export default function Home() {
 
                       {results[month] && (
                         <div className="mt-4 p-4 bg-secondary/50 rounded-lg">
-                          <h3 className="font-semibold mb-2">Results for {month}</h3>
+                          <h3 className="font-semibold mb-2">Resultater for {month}</h3>
                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
                             <div>
-                              <p>Gross Income: {formatCurrency(results[month]!.grossIncome)}</p>
-                              <p>Fake Gross Income: {formatCurrency(results[month]!.fakeGrossIncome)}</p>
+                              <p>Bruttoløn: {formatCurrency(results[month]!.grossIncome)}</p>
                             </div>
                             <div>
                               <p>Pension: {formatCurrency(results[month]!.deductions.pension)}</p>
@@ -283,10 +282,10 @@ export default function Home() {
                               <p>AM-bidrag: {formatCurrency(results[month]!.deductions.amBidrag)}</p>
                             </div>
                             <div>
-                              <p>Taxable Income: {formatCurrency(results[month]!.taxableIncome)}</p>
-                              <p>Tax Deduction: {formatCurrency(results[month]!.taxDeduction)}</p>
-                              <p>Tax: {formatCurrency(results[month]!.tax)}</p>
-                              <p className="font-semibold">Net Income: {formatCurrency(results[month]!.netIncome)}</p>
+                              <p>Skatteberettiget løn: {formatCurrency(results[month]!.taxableIncome)}</p>
+                              <p>Fradrag: {formatCurrency(results[month]!.taxDeduction)}</p>
+                              <p>A-Skat: {formatCurrency(results[month]!.tax)}</p>
+                              <p className="font-semibold">Til udbetaling: {formatCurrency(results[month]!.netIncome)}</p>
                             </div>
                           </div>
                         </div>
@@ -301,7 +300,7 @@ export default function Home() {
           <TabsContent value="parameters">
             <Card>
               <CardHeader>
-                <CardTitle>Calculator Parameters</CardTitle>
+                <CardTitle>Lønberegner Indstillinger</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -326,30 +325,29 @@ export default function Home() {
         {yearlyTotals && (
           <Card>
             <CardHeader>
-              <CardTitle>Yearly Totals</CardTitle>
+              <CardTitle>Årsindkomst</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
-                  <h3 className="font-semibold mb-2">Income</h3>
-                  <p>Gross Income: {formatCurrency(yearlyTotals.grossIncome)}</p>
-                  <p>Fake Gross Income: {formatCurrency(yearlyTotals.fakeGrossIncome)}</p>
+                  <h3 className="font-semibold mb-2">Indkomst</h3>
+                  <p>Nettoløn: {formatCurrency(yearlyTotals.grossIncome)}</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-2">Deductions</h3>
+                  <h3 className="font-semibold mb-2">Fradrag</h3>
                   <p>Pension: {formatCurrency(yearlyTotals.deductions.pension)}</p>
                   <p>ATP: {formatCurrency(yearlyTotals.deductions.atp)}</p>
                   <p>AM-pension: {formatCurrency(yearlyTotals.deductions.amPension)}</p>
                   <p>AM-bidrag: {formatCurrency(yearlyTotals.deductions.amBidrag)}</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-2">Tax</h3>
-                  <p>Taxable Income: {formatCurrency(yearlyTotals.taxableIncome)}</p>
-                  <p>Tax Deduction: {formatCurrency(yearlyTotals.taxDeduction)}</p>
-                  <p>Tax: {formatCurrency(yearlyTotals.tax)}</p>
-                  <p className="font-semibold text-lg">Net Income: {formatCurrency(yearlyTotals.netIncome)}</p>
+                  <h3 className="font-semibold mb-2">Skat</h3>
+                  <p>Skatteberettiget løn: {formatCurrency(yearlyTotals.taxableIncome)}</p>
+                  <p>Skatte Fradrag: {formatCurrency(yearlyTotals.taxDeduction)}</p>
+                  <p>A-Skat: {formatCurrency(yearlyTotals.tax)}</p>
+                  <p className="font-semibold text-lg">Netto løn: {formatCurrency(yearlyTotals.netIncome)}</p>
                   <p className="text-sm text-muted-foreground mt-2">
-                    Average Monthly: {formatCurrency(yearlyTotals.netIncome / 12)}
+                    Gennemsnits månedsløn: {formatCurrency(yearlyTotals.netIncome / 12)}
                   </p>
                 </div>
               </div>
