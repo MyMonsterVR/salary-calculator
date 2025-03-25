@@ -347,7 +347,7 @@ export default function Home() {
                   <p>A-Skat: {formatCurrency(yearlyTotals.tax)}</p>
                   <p className="font-semibold text-lg">Netto løn: {formatCurrency(yearlyTotals.netIncome)}</p>
                   <p className="text-sm text-muted-foreground mt-2">
-                    Gennemsnits månedsløn: {formatCurrency(yearlyTotals.netIncome / 12)}
+                    Gennemsnits månedsløn pr år (kræver at alle 12 måneder er udfyldt): {formatCurrency(yearlyTotals.netIncome / 12)}
                   </p>
                 </div>
               </div>
