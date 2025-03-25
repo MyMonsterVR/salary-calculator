@@ -46,9 +46,9 @@ export default function Home() {
     pensionPercentage: "0.04",
     atp: "99",
     amBidrag: "0.08",
-    taxRate: "0.37",
-    monthlyTaxDeduction: "4818",
-    additional: "81.20"
+    taxRate: "0.38",
+    monthlyTaxDeduction: "0",
+    additional: "0"
   });
   const [partialMonthSettings, setPartialMonthSettings] = useState<{ [key: string]: PartialMonthSettings }>(
     Object.fromEntries(months.map(month => [month, {
